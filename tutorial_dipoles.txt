@@ -1,4 +1,4 @@
-Tutorial: Simulating and estimating EEG sources
+Simulating and estimating EEG sources
 ============
 
 
