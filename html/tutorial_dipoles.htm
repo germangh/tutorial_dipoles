@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Tutorial: Simulating and estimating EEG sources</title>
+<link rel="stylesheet" type="text/css" href="remark_files/remark.css" />
+<link rel="stylesheet" type="text/css" href="remark_files/pygments.css" />
+
+</head>
+<body>
+<div id = "remark-all">
+<div id = "remark">
+<div class = "ParentList">
+
+<ol>
+<li><a href="tutorial_dipoles.htm">Tutorial: Simulating and estimating EEG sources</a></li>
+</ol>
+</div>
+
+<div class = "remark-end-list"></div>
+
+<h1>Tutorial: Simulating and estimating EEG sources</h1>
+<p>In this tutorial we will learn how simple intracerebral current sources can 
+generate complicated patterns of EEG potentials at the scalp.
+We will then see how, under certain conditions, the underlying
+<em>EEG sources</em> can be effectively localized from the scalp measurements. 
+However, the tutorial also aims to illustrate how the solution to 
+the <em>inverse EEG problem</em> can be easily confounded e.g. by the presence of 
+noisy background EEG activity. </p>
+<p>Below you can download the slides of a presentation that deals with 
+the topic of this tutorial:</p>
+<p><a href="./slides.pdf">Download presentation slides</a></p>
+<h2>Download and Installation</h2>
+<p>Please download the <a href="./tutorial_dipoles.zip">tutorial</a> and uncompress the .zip
+ file. Then simply add directory <code>tutorial_dipoles</code> and all its 
+subdirectories to your MATLAB's path. </p>
+<p><a href="./tutorial_dipoles.zip">Download the tutorial</a></p>
+<p>To add a directory and all its subdirectories to MATLAB's path you can use
+MATLAB's command:</p>
+<pre><code>addpath(genpath('M:/mypath/tutorial_dipoles'))
+</code></pre>
+<p>where <code>M:/mypath/tutorial_dipoles</code> is the location where you uncompressed
+the .zip file.</p>
+<p><strong>Note:</strong> The tutorial .zip file contains the tutorial code, the 
+required data files and this documentation in HTML format. You can browse
+the documentation offline by opening with your web browser file 
+<code>index.htm</code>, which is found under folder <code>tutorial_dipoles</code>.</p>
+<h2>Dependencies</h2>
+<p>The tutorial should work under MATLAB R2010a or newer. It is likely to work
+also under not too much older MATLAB versions. The tutorial makes use of the
+following freely available MATLAB toolboxes:</p>
+<p><a href="http://fieldtrip.fcdonders.nl/">Fieldtrip MATLAB toolbox</a></p>
+<p>For convenience, all the dependencies have been included in the tutorial 
+.zip package so that you don't need to download them separately. </p>
+<p><strong>Note:</strong> The tutorial uses the 3D rendering capabilities of the OpenGL 
+implementation that is included with your operating system. As OpenGL 
+support differ slightly between operating systems there is a small chance
+that some of the figures will display differently in different operating 
+systems. The figures shown in the tutorial have been generated in 
+Windows 7. </p>
+<h2>Getting help</h2>
+<p>The tutorial instructions explain just a small fraction of the 
+tutorial scripts' features. You can always get a more detailed help of 
+individual MATLAB functions using the command <code>help</code> followed by the
+name of the relevant function. For instance, the command:</p>
+<pre><code>help plot
+</code></pre>
+<p>will display the help of MATLAB's built-in <code>plot</code> command. </p>
+<h2>MATLAB classes</h2>
+<h3>What are classes and objects?</h3>
+<p>The tutorial makes use of <a href="http://www.mathworks.nl/help/techdoc/matlab_oop/brh2rgw.html">MATLAB's classes</a>. Do not get get
+intimidated by the term. A class is just a <em>user-defined data type</em>. MATLAB 
+comes with lots of built-in data types. For instance <code>double</code> and <code>single</code>
+are two types that can store numeric data:</p>
+<pre><code>x = 5;
+</code></pre>
+<p>The variable <code>x</code> above is now an <em>instance</em> (also called 
+an <em>object</em>) of class <code>double</code>. You can find out the classes of the variables
+in your MATLAB's workspace using the command <code>whos</code>. The result could be
+something like this:</p>
+<pre><code>&gt;&gt; whos
+  Name        Size              Bytes  Class       Attributes
+
+  myHead      1x1             2805970  head.mri              
+  x           1x1                   8  double                
+  y           1x1                   8  double
+</code></pre>
+<p>where you can see that variable <code>x</code> is an object of class <code>double</code> and variable
+<code>myHead</code> is an object of class <code>head.mri</code>. The latter is a class that we 
+have defined specifically for the purposes of this tutorial. </p>
+<p>It is important to realize the difference between a <em>class</em> and an <em>object</em>. 
+In the example above, <code>x</code> and <code>y</code> are two different objects of the same class.</p>
+<h3>What are class methods?</h3>
+<p>One of the great advantages of using objects with MATLAB is that it allows you
+to <a href="http://en.wikipedia.org/wiki/Function_overloading">overload</a> function names. For instance, if you run the 
+command:</p>
+<pre><code>plot(myHead);
+</code></pre>
+<p>MATLAB will first check whether a specialized <em>method</em> <code>plot()</code> has been defined
+ for class <code>head.mri</code>. If such method exists then it will run that method
+ instead of MATLAB's built-in function <code>plot()</code>. A <code>head.mri</code> object contains a 
+head model and a <code>double</code> object contains just numbers. Indeed, plotting such
+ different data types involve very different operations. Thus, it makes sense
+that different versions of <code>plot</code> are called, depending on the <em>class</em> of what
+ you want to be plotted. Remember: the specialized version of <code>plot()</code> that
+ takes care of plotting <code>mri.head</code> objects is called a <em>method</em> of class 
+ <code>mri.head</code>.</p>
+<h3>Getting help on class' methods</h3>
+<p>Imagine that you want to get some help on method <code>plot()</code> for objects of class
+<code>mri.head</code>. You could try to do this:</p>
+<pre><code>help plot
+</code></pre>
+<p>but you will find that the help that is displayed corresponds to MATLAB's 
+built-in <code>plot()</code> instead of corresponding to method <code>plot()</code> of class 
+<code>mri.head</code>. Only if you read until the end of the help that is displayed you
+will see a section that reads <code>Overloaded methods:</code> and that lists several
+other functions that are also called <code>plot()</code>, and that will be called 
+instead of the built-in, depending on the type of the input argument. 
+If you already installed the tutorial scripts you should see in that list
+a link reading <code>head.mri</code>. If you click that link you will get the help that
+you were looking for. Alternatively, you could have just used the command:</p>
+<pre><code>help head.mri.plot
+</code></pre>
+<h2>Note on web-browsers</h2>
+<p>This documentation uses MathML to display inlined mathematics. Unfortunately
+ not all browsers support MathML natively, including Internet Explorer. In this
+ case you will not be able to see the mathematical expressions correctly.
+ While there is a plug-in available (MathPlayer) for adding this capability
+ to Internet Explorer, in our tests this combination crashed the browser when
+ viewing some of these pages. According to Wikipedia, some major web-browsers
+ that currently display MathML natively include Mozilla Firefox, Opera, and
+ Camino. At this point we can't do anything else than to direct you to use 
+ these browsers to view these pages.  <br />
+</p>
+<h2>Questions and feedback</h2>
+<p>This tutorial has been prepared for the course <a href="http://www.nbtwiki.net/doku.php?id=courses:advanced_human_neurophysiology#.TtOOWvJ7eUM">Advanced Human Neurophysiology</a>,
+ given at the <a href="http://www.vu.nl/en/">VU University Amsterdam</a>, and organized by 
+<a href="http://www.bio.vu.nl/enf/linkenkaer/">Klaus Linkenkaer-Hansen</a>. The author of the tutorial is 
+<a href="mailto:german.gomezherrero@kasku.org">German Gomez-Herrero</a>. </p>
+<p>As both code and documentation has been made from scratch for the 
+year 2011 course, it is likely that you will find bugs and typos. 
+Please <a href="mailto:german.gomezherrero@kasku.org">report those to me</a> so that I can fix them. I would also 
+appreciate any feedback (positive or negative) on the tutorial contents
+so that I can improve it. </p>
+<p><a href="mailto:german.gomezherrero@kasku.org">Email me</a></p>
+<h2>Learn more</h2>
+<div class = "DocChildren">
+
+<ol>
+<li><a href="head_model.htm">Part I: A realistic head model</a></li>
+<li><a href="eeg_sources.htm">Part II: Simulating EEG sources</a></li>
+<li><a href="source_localization.htm">Part III: Localizing EEG sources</a></li>
+</ol>
+</div>
+
+<div class = "remark-end-list"></div>
+</div>
+<div id="remark-footer">
+<p><a href="http://kaba.hilvi.org/remark">Remark 1.5.1</a> - Page generated 02.12.2012 17:20.</p>
+</div>
+</div>
+</body>
+</html>

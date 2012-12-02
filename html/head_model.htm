@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Part I: A realistic head model</title>
+<link rel="stylesheet" type="text/css" href="remark_files/remark.css" />
+<link rel="stylesheet" type="text/css" href="remark_files/pygments.css" />
+<script type="text/javascript" src="remark_files/ASCIIMathMLwFallback.js"></script>
+<script type="text/javascript" src="remark_files/highslide/highslide-full.js"></script>
+<link rel="stylesheet" type="text/css" href="remark_files/highslide/highslide.css" />
+<script type="text/javascript">
+hs.graphicsDir = 'remark_files/highslide/graphics/';
+hs.showCredits = false;
+</script>
+<script type="text/javascript" src="remark_files/highslide/highslide-full.js"></script>
+<link rel="stylesheet" type="text/css" href="remark_files/highslide/highslide.css" />
+<script type="text/javascript">
+hs.graphicsDir = 'remark_files/highslide/graphics/';
+hs.showCredits = false;
+</script>
+<script type="text/javascript" src="remark_files/highslide/highslide-full.js"></script>
+<link rel="stylesheet" type="text/css" href="remark_files/highslide/highslide.css" />
+<script type="text/javascript">
+hs.graphicsDir = 'remark_files/highslide/graphics/';
+hs.showCredits = false;
+</script>
+
+</head>
+<body>
+<div id = "remark-all">
+<div id = "remark">
+<div class = "ParentList">
+
+<ol>
+<li><a href="tutorial_dipoles.htm">Tutorial: Simulating and estimating EEG sources</a></li>
+<li><a href="head_model.htm">Part I: A realistic head model</a></li>
+</ol>
+</div>
+
+<div class = "remark-end-list"></div>
+
+<h1>Part I: A realistic head model</h1>
+<p><a href="tutorial_dipoles.htm">Back to Tutorial: Simulating and estimating EEG sources</a></p>
+<p>In this tutorial we  use a realistic electromagnetic model to map 
+intracerebral current sources (modeled as dipoles) to a set of EEG sensors.
+Our model is based on a real MRI scan from an unknown subject identified 
+by the code <code>0003</code>. Below are the main steps that we need to take in order 
+to build our head model. The first three steps have been already performed
+ for you, but you will need to carry out the other four steps to 
+successfully a model that we can play around with. </p>
+<h2>Step 1: Tissue segmentation</h2>
+<p>Different brain tissues have different characteristic conductivities. A 
+realistic head model needs to take this fact into account and, therefore, 
+tissue types need to be segmented. Typically, only scalp, skull and 
+cerebral tissues need to be identified in order to build a reasonably 
+accurate electromagnetic model. However, you can complicate your model 
+by segmenting also white and gray matter and, if you really like making 
+your life difficult, by taking into consideration the fact that tissue
+ conductivity (especially within white matter) is 
+<a href="http://en.wikipedia.org/wiki/Anisotropy">anisotropic</a>.</p>
+<p>In the old times, brain tissues had to be manually or semi-automatically 
+segmented. This was not only time consuming but also highly subjective. 
+Fortunately, the standardization of MRI scanning technology has
+allowed the development of extremely accurate fully-automated tissue 
+segmentation packages. There are multiple freely available alternatives but,
+arguably, the most robust and widely tested software package is 
+<a href="http://surfer.nmr.mgh.harvard.edu/">Freesurfer</a>, developed at the <a href="http://www.nmr.mgh.harvard.edu/martinos/">Athinoula A. Martinos Center 
+for Biomedical Imaging</a>.   <br />
+</p>
+<h2>Step 2: Surface reconstruction</h2>
+<p>Once different tissues  have been identified, we need to build closed 
+triangulated surfaces between all relevant tissue types. In our model we 
+have three such surfaces: the <em>outer skin</em> surface (on which the 
+EEG sensors rest), the <em>outer skull</em> surface, and the <em>inner skull</em> surface
+(within which the <em>EEG sources</em> may be located). These surfaces can be 
+automatically generated using a variety of software packages. In this 
+tutorial we used the <em>watershed</em> algorithm included in the <a href="http://www.nmr.mgh.harvard.edu/martinos/userInfo/data/MNE_register/">MNE software</a>, 
+which is also maintained by <a href="http://www.nmr.mgh.harvard.edu/martinos/">Athinoula A. Martinos Center</a>. </p>
+<p>The resulting surfaces are available in <code>.tri</code> data format in folder 
+<code>datasim/db/0003</code>:</p>
+<pre><code>0003-inner_skull-5120.tri
+0003-inner_skull-dense.tri
+...
+0003-outer_skin-5120.tri
+0003-outer_skin-dense.tri
+</code></pre>
+<p>There are two versions of each surface. The <code>dense</code> surfaces are just
+more densely tessellated versions of the <code>5120</code> surfaces, which consist of
+(only) 5120 vertices. </p>
+<h2>Step 3: Sensor co-localization</h2>
+<p>The purpose of having a densely tesselated outer skull surface is that 
+it allows for more accurate co-registration of the EEG sensor locations. That 
+is, it makes it easier to match each EEG sensor with a surface vertex.
+For this tutorial we use a state-of-the-art sensor net with 256 sensors by
+ <a href="http://www.egi.com">EGI</a>. The standard sensor locations provided by EGI were co-registered
+ with surface <code>0003-outer_skull-dense.tri</code> using <a href="http://fieldtrip.fcdonders.nl/">Fieldtrip</a>, and
+ are available in file <code>0003-sensors.hpts</code>. The latter is just a text file that
+ you can inspect with a text editor, if you want.</p>
+<h2>Step 4: Loading and inspecting the anatomical model</h2>
+<p>You can load the surface information into MATLAB using the command:</p>
+<pre><code>myHead = head.mri('SubjectPath', 'db/0003')
+</code></pre>
+<p>assuming of course that you are in the <code>tutorial_dipoles</code> folder that you
+ created when you unzipped the tutorial files. The command above will
+ create an <em>object</em> of class <code>head.mri</code>. An object is just a convenient
+ representation for a bunch of <em>data</em> and operations (or <em>methods</em>) that
+ can be performed on that data. Using <a href="http://www.mathworks.nl/company/newsletters/articles/introduction-to-object-oriented-programming-in-matlab.html">objects with MATLAB</a>
+ is still relatively unusual among MATLAB developers. Despite the
+ limitations of MATLAB's OOP (<a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Programming</a>) 
+ implementation, I personally like the objected oriented programming
+ paradigm and that's the only reason why I use it in this tutorial.</p>
+<p>You can now easily plot the model surfaces with the command:</p>
+<pre><code>figure; 
+plot(myHead);
+</code></pre>
+<p>Just for fun, see <code>help head.mri.plot</code> and try to make a figure that displays
+only the inner skull surface and the locations of the sensors. If you want, 
+you can save your figures in various graphics formats using MATLAB 
+built-in command <code>print</code>. For instance, the command:</p>
+<pre><code>print -dpng myfigure.png
+</code></pre>
+<p>will save the current figure in <a href="http://es.wikipedia.org/wiki/Portable_Network_Graphics">portable network graphics</a> format in a
+file called <code>myfigure.png</code>.</p>
+<p>If you zoom in the head model that we generated above, you will see that the EEG
+sensors (displayed as red dots) do not fall exactly on vertices of the outer
+skin surface. See the figure on the right below. </p>
+<div class="highslide-gallery">
+<a href="head_model.png" class="highslide" onclick="hs.expandDuration = 250; hs.restoreDuration = 250; return hs.expand(this)">
+    <img src="remark_files/thumbnails/head_model-a48ac9070800de65.png" alt="The anatomical triangulated surfaces of our head model. The red dots  identify the locations of the EEG sensors " title="The anatomical triangulated surfaces of our head model. The red dots  identify the locations of the EEG sensors " /></a>
+<div class="highslide-caption">
+The anatomical triangulated surfaces of our head model. The red dots  identify the locations of the EEG sensors 
+</div>
+<a href="head_model_zoomed.png" class="highslide" onclick="hs.expandDuration = 250; hs.restoreDuration = 250; return hs.expand(this)">
+    <img src="remark_files/thumbnails/head_model_zoomed-ef603e17a27c5172.png" alt="Note that the EEG sensors (red dots) do not fall on surface vertices " title="Note that the EEG sensors (red dots) do not fall on surface vertices " /></a>
+<div class="highslide-caption">
+Note that the EEG sensors (red dots) do not fall on surface vertices 
+</div>
+</div>
+
+<p>However, recall that we said that EEG sensors need to be co-registered
+with vertices of the outer skin surface. The reason for the discrepancy is that we performed the co-registration using the <code>dense</code> version of the outer 
+skin surface but our head model is actually based on a lower-resolution 
+triangulated surface (the <code>0003-outer_skull-5120.tri</code> surface). Indeed, you 
+can see that the sensors do fall on vertices of the <code>dense</code> surface:</p>
+<pre><code>figure;
+h = plot(myHead, 'Surface', 'OuterSkinDense');
+set(h(1),'facealpha',1,'edgealpha',1);
+</code></pre>
+<p>The <code>'facealpha'</code> and <code>'edgealpha'</code> are just properties of the surface plot 
+that we can use to manipulate the transparency of the triangles (the <em>faces</em>) and of the edges.</p>
+<div class="highslide-gallery">
+<a href="head_model_dense_zoomed.png" class="highslide" onclick="hs.expandDuration = 250; hs.restoreDuration = 250; return hs.expand(this)">
+    <img src="remark_files/thumbnails/head_model_dense_zoomed-4add2d9e9aef0699.png" alt="The densely tessellated outer skin surface. Note how the sensor locations fall exactly on surface vertices. " title="The densely tessellated outer skin surface. Note how the sensor locations fall exactly on surface vertices. " /></a>
+<div class="highslide-caption">
+The densely tessellated outer skin surface. Note how the sensor locations fall exactly on surface vertices. 
+</div>
+</div>
+
+<p>You can force the sensors to really fall on vertices of the low resolution
+outer skin surface with the command:</p>
+<pre><code>myHead = sensors_to_outer_skin(myHead)
+</code></pre>
+<h3>Step 5: Intracerebral source grid</h3>
+<p>In order to build an electromagnetic model we need to specify the 
+spatial locations where EEG sources may be located. This is typically done by
+uniformly sampling the inner skull volume using a regular 3D grid:</p>
+<pre><code>myHead = make_source_grid(myHead, 0.5)
+</code></pre>
+<p>where the second input argument is a scalar in the range [0 1] that determines
+the density of the generated grid. The higher the density, the higher the number
+of elements in the source grid. Play a bit with the density value to see how
+ it works. However, this tutorial has been tested only with a grid 
+ density of 0.5. Using a higher or lower value might have unexpected results, 
+ like abnormally inaccurate inverse solutions, and is not recommended. </p>
+<div class="highslide-gallery">
+<a href="source_grid_1.png" class="highslide" onclick="hs.expandDuration = 250; hs.restoreDuration = 250; return hs.expand(this)">
+    <img src="remark_files/thumbnails/source_grid_1-76a8932efe8417cc.png" alt="The 3D grid of candidate EEG source locations " title="The 3D grid of candidate EEG source locations " /></a>
+<div class="highslide-caption">
+The 3D grid of candidate EEG source locations 
+</div>
+<a href="source_grid_2.png" class="highslide" onclick="hs.expandDuration = 250; hs.restoreDuration = 250; return hs.expand(this)">
+    <img src="remark_files/thumbnails/source_grid_2-08b2f9f640dc8795.png" alt="Grid locations within the inner skull surface, i.e. the allowed locations for EEG sources. " title="Grid locations within the inner skull surface, i.e. the allowed locations for EEG sources. " /></a>
+<div class="highslide-caption">
+Grid locations within the inner skull surface, i.e. the allowed locations for EEG sources. 
+</div>
+</div>
+
+<p>What do you think are the benefits of having a denser source grid? And the
+disadvantages?</p>
+<h2>Step 6: BEM computation</h2>
+<p>The steps above have fully described the anatomical aspects of our head model.
+It is now time to compute the electromagnetic model. That is, to describe the
+mapping that relates activity at the source grid locations to activity at the
+scalp sensor locations. This mapping can be computed using a 
+<a href="http://en.wikipedia.org/wiki/Boundary_element_method">Boundary Element Method (BEM)</a>.</p>
+<p>Again, there are multiple freely available software packages implementing the
+BEM. <a href="http://sccn.ucsd.edu/eeglab/">EEGLAB</a>, <a href="http://fieldtrip.fcdonders.nl/">Fieldtrip</a>, and the 
+<a href="http://www.nmr.mgh.harvard.edu/martinos/userInfo/data/MNE_register/">MNE software</a> are just three examples. Moreover, each of these software
+packages include several algorithms for computing the BEM coefficients. In this
+tutorial we use the default algorithm <a href="http://dx.doi.org/10.1109/10.19859">(Oostendorp and Oosterom, 1989)</a> of the Fieltrip toolbox. To compute the BEM model, just run the command:</p>
+<pre><code>myHead = make_bem(myHead);
+</code></pre>
+<p>The step above might take few minutes to compute.
+As you may have guessed already, the computation of the BEM model will take
+longer, the denser the triangulated boundaries of the model. This is precisely
+the reason why we did not use the <code>dense</code> surfaces to build our model, but decided to use those only for sensor co-registration purposes. An even more
+important problem of using too dense surfaces is that it can lead to numerical
+innaccuracies due to the fact that the model may become <a href="http://en.wikipedia.org/wiki/Condition_number">ill-conditioned</a>.</p>
+<h2>Step 7: Leadfield generation</h2>
+<p>The actual mapping from source grid locations to EEG sensors (also known as
+the <em>leadfield matrix</em>) is computed, based on the BEM model, with the
+following command:</p>
+<pre><code> myHead = make_leadfield(myHead);
+</code></pre>
+<p>This step may also take a couple of minutes to compute. It will take longer
+the higher the number of sensors and the higher the number of source grid
+locations. </p>
+<p>The result of this step is a 257x3xN matrix, where N is the number of 
+source grid locations. This matrix is stored in the <code>LeadField</code> property
+of our <code>myHead</code> object:</p>
+<pre><code>myHead.LeadField    % The leadfield matrix
+</code></pre>
+<p>The meaning of the leadfield matrix is straightforward. If you had a 
+dipole ''m=[m_x, m_y, m_z]'' at the ''i''th grid location (whose coordinates
+are in <code>myHead.SourceSpace.pnt(i,:)</code>), then the EEG measured at the ''j''th
+sensor would be:</p>
+<pre><code>squeeze(myHead.LeadField(j, :, i))*m'
+</code></pre>
+<p>There is an important point that you should realize here. The scalp
+potentials generated by a source dipole do not depend only 
+on the strength of the source (the length of the dipole) but they do 
+also <strong>strongly depend on its orientation</strong>. As you will see below, dipoles
+that are close to the scalp and are tangentially or radially oriented 
+with respect to the scalp surface generate very 
+characteristic distributions of potentials across the scalp.</p>
+<p><strong>NOTE:</strong> Computing the leadfield matrix requires solving 
+<a href="http://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell equations</a>, 
+under the boundary conditions imposed by the head model. These are 
+complicated differential equations and some of you may wonder how can 
+their solution be as simple as a linear and instantaneous mapping. 
+The answer is that the exact solution to Maxwell equations is far from 
+being that simple. However, in EEG and MEG applications we take advantage of the
+fact that the signals measured rarely exceed frequencies above 1 KHz. 
+At such low frequencies, we can safely use the so-called quasi-static
+approximation of Maxwell equations, which indeed leads to a solution
+that is just a linear and instantaneous mapping. For those interested in 
+bioelectromagnetism I recommend the book by 
+<a href="http://www.bem.fi/book/">(Malmivuo and Plonsey, 1995)</a>.</p>
+<h2>What now?</h2>
+<p>Now you are ready to go to <a href="./eeg_sources.htm">Part II</a> of this tutorial where we will use
+the head model that we just prepared to simulate EEG sources and to study
+the patterns of scalp potentials that such sources generate.</p>
+</div>
+<div id="remark-footer">
+<p><a href="http://kaba.hilvi.org/remark">Remark 1.5.1</a> - Page generated 02.12.2012 17:20.</p>
+</div>
+</div>
+</body>
+</html>
