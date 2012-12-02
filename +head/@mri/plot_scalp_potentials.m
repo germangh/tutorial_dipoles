@@ -2,7 +2,7 @@ function h = plot_scalp_potentials(obj, varargin)
 % PLOT_SCALP_POTENTIALS
 % Plots the generated scalp potentials
 %
-% 
+%
 % plot_scalp_potentials(obj, 'key', value, ...)
 %
 %
@@ -25,14 +25,14 @@ function h = plot_scalp_potentials(obj, varargin)
 %             provided. Default: '2D'
 %
 % 'Output'  : Either 'figures', 'png' or 'pdf'. The 'figures' option (the
-%             default) will generate a series of MATLAB figures. The 'png' 
+%             default) will generate a series of MATLAB figures. The 'png'
 %             option will create a .png graphics file for each topography.
 %             The 'pdf' option will create an animated pdf file (a video).
 %             The latter option is only available if pdflatex is installed
 %             in the system. Default: 'figures'
 %
 %
-% 
+%
 % See also: head.mri
 
 % Documentation: class_head_mri.txt
@@ -42,21 +42,18 @@ import misc.process_varargin;
 
 keySet = {'time', 'topo', 'output', 'samplingrate'};
 time = [];
-topo = '2d';
-output = 'figures';
-samplingrate = 500;
 eval(process_varargin(keySet, varargin));
 
 if isempty(time),
-   % Time-series plot    
-   data = scalp_potentials(obj);
-   eegplot(data, 'srate', srate);
+    % Time-series plot
+    data = scalp_potentials(obj);
+    eegplot(data, 'srate', srate);
 else
     % Topographic plot
-    
-    
+    h = plot_source_leadfield(obj, 1:obj.NbSources, varargin{:}, ...
+        'Leadfield', scalp_potentials(obj, 'Time', time)); 
 end
-h = plot_source_leadfield(obj, 1:obj.NbSources, varargin{:});
+
 
 
 

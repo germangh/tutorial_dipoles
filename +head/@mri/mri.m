@@ -39,7 +39,8 @@ classdef mri < head.head
         FieldTripVolume;
         LeadField;
         SourceDipolesLeadField;
-        InverseSolution;     
+        InverseSolution; 
+        MeasNoise;
     end
     
     properties (GetAccess = private, SetAccess = private)

@@ -9,7 +9,7 @@ Our model is based on a real MRI scan from an unknown subject identified
 by the code `0003`. Below are the main steps that we need to take in order 
 to build our head model. The first three steps have been already performed
  for you, but you will need to carry out the other four steps to 
-successfully a model that we can play around with. 
+successfully build a model that we can play around with. 
 
 ## Step 1: Tissue segmentation
 
@@ -47,12 +47,12 @@ EEG sensors rest), the _outer skull_ surface, and the _inner skull_ surface
 (within which the _EEG sources_ may be located). These surfaces can be 
 automatically generated using a variety of software packages. In this 
 tutorial we used the _watershed_ algorithm included in the [MNE software][mne], 
-which is also maintained by [Athinoula A. Martinos Center][athinoula]. 
+which is also maintained by the [Athinoula A. Martinos Center][athinoula]. 
 
 [mne]: http://www.nmr.mgh.harvard.edu/martinos/userInfo/data/MNE_register/
 
 The resulting surfaces are available in `.tri` data format in folder 
-`datasim/db/0003`:
+`db/0003`:
 
 	0003-inner_skull-5120.tri
 	0003-inner_skull-dense.tri
@@ -90,11 +90,8 @@ assuming of course that you are in the `tutorial_dipoles` folder that you
  created when you unzipped the tutorial files. The command above will
  create an _object_ of class `head.mri`. An object is just a convenient
  representation for a bunch of _data_ and operations (or _methods_) that
- can be performed on that data. Using [objects with MATLAB][matlab-oop]
- is still relatively unusual among MATLAB developers. Despite the
- limitations of MATLAB's OOP ([Object Oriented Programming][oop]) 
- implementation, I personally like the objected oriented programming
- paradigm and that's the only reason why I use it in this tutorial.
+ can be performed on that data. You can read more about
+  [objects with MATLAB][matlab-oop] if you want. 
 
 [matlab-oop]: http://www.mathworks.nl/company/newsletters/articles/introduction-to-object-oriented-programming-in-matlab.html
 
@@ -107,21 +104,22 @@ You can now easily plot the model surfaces with the command:
 	figure; 
 	plot(myHead);
 
-Just for fun, see `help head.mri.plot` and try to make a figure that displays
-only the inner skull surface and the locations of the sensors. If you want, 
-you can save your figures in various graphics formats using MATLAB 
-built-in command `print`. For instance, the command:
+Just for fun, use the figure toolbox (at the top of the figure that just opened) to
+rotate and zoom in/out the head model. Rotating might be slow if your computer is not
+very powerful. Now, see `help head.mri.plot` and try to make a figure that displays
+only the inner skull surface and the locations of the sensors. Then, save this figure
+using MATLAB's built-in command `print`:
 
 	print -dpng myfigure.png
   
-will save the current figure in [portable network graphics][png] format in a
-file called `myfigure.png`.
+which will save the current figure in [portable network graphics][png] format in a
+file called `myfigure.png`.  
 
 [png]: http://es.wikipedia.org/wiki/Portable_Network_Graphics
 	
 If you zoom in the head model that we generated above, you will see that the EEG
 sensors (displayed as red dots) do not fall exactly on vertices of the outer
-skin surface. See the figure on the right below. 
+skin surface. Try it and you should see something like the figure on the right below. 
 
 [[set_many Gallery]]:
 	thumbnail_max_width 250
@@ -164,7 +162,11 @@ that we can use to manipulate the transparency of the triangles (the _faces_) an
 You can force the sensors to really fall on vertices of the low resolution
 outer skin surface with the command:
 
+	close all; % Just to close previous figures
 	myHead = sensors_to_outer_skin(myHead)
+	
+Zoom-in the generated figure to ensure that the sensors are now placed on vertices of the
+coarse head surface.
 
 
 ### Step 5: Intracerebral source grid
@@ -221,7 +223,7 @@ tutorial we use the default algorithm [(Oostendorp and Oosterom, 1989)][becmp] o
 
 The step above might take few minutes to compute.
 As you may have guessed already, the computation of the BEM model will take
-longer, the denser the triangulated boundaries of the model. This is precisely
+longer, the denser the triangulated boundaries of the head model. This is precisely
 the reason why we did not use the `dense` surfaces to build our model, but decided to use those only for sensor co-registration purposes. An even more
 important problem of using too dense surfaces is that it can lead to numerical
 innaccuracies due to the fact that the model may become [ill-conditioned][illconditioned].
@@ -252,7 +254,14 @@ dipole ''m=[m_x, m_y, m_z]'' at the ''i''th grid location (whose coordinates
 are in `myHead.SourceSpace.pnt(i,:)`), then the EEG measured at the ''j''th
 sensor would be:
 
-	squeeze(myHead.LeadField(j, :, i))*m'
+	% EEG potential measured at the 10th sensor assuming a single
+	% dipole at the 100th source location:
+	i = 100;
+	j = 10;
+	% The dipole coordinates:
+	m = [0;1;0]
+	leadField_ji = myHead.LeadField(j, :, i)
+	v = leadField_ji*m
 
 There is an important point that you should realize here. The scalp
 potentials generated by a source dipole do not depend only 

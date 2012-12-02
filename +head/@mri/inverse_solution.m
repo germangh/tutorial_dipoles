@@ -1,4 +1,20 @@
 function obj = inverse_solution(obj, varargin)
+% INVERSE_SOLUTION - Compute inverse solution
+%
+% obj = inverse_solution(obj);
+%
+% obj = inverse_solution(obj, 'key', value, ...);
+%
+% Where
+%
+% OBJ is a head.mri object.
+%
+% 
+% See also: head.mri
+
+% Documentation: class_head_mri.txt
+% Description: Compute inverse solution
+
 import misc.process_varargin;
 
 keySet = {'time', 'method'};
@@ -11,7 +27,7 @@ switch lower(method),
     case 'mne'
         M = pinv(obj.SourceDipolesLeadField);
         
-        potentials = sum(source_leadfield(obj, 1:obj.NbSources, 'time', time),2);
+        potentials = scalp_potentials(obj, 'time', time);
         
         strength = M*potentials;
        

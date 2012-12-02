@@ -1,6 +1,5 @@
 function obj = add_source_activation(obj, index, activation)
-% ADD_SOURCE_ACTIVATION
-% Adds temporal activation to an EEG source
+% ADD_SOURCE_ACTIVATION - Adds temporal activation to an EEG source
 %
 % obj = add_source_activation(obj, index, activation)
 %

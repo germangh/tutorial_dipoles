@@ -1,6 +1,5 @@
 function obj = add_source(obj, varargin)
-% ADD_SOURCE
-% Adds an EEG source to an MRI-based head model
+% ADD_SOURCE - Adds an EEG source to an MRI-based head model
 %
 %
 % obj = add_source(obj, 'key', value, ...)
@@ -11,13 +10,13 @@ function obj = add_source(obj, varargin)
 % OBJ is a head.mri object
 %
 %
-% Common key/value pairs:
+% ## Accepted key/value pairs:
 %
 % 'Name'        : Name identifying the EEG source (a string)
 %
-% 'MinDepth'    : Minimum depth of the EEG source. Default: 0
+% 'MinDepth'    : Minimum depth, in mm, of the EEG source. Default: 0
 %
-% 'MaxDepth'    : Maximum depth. Default: Inf
+% 'MaxDepth'    : Maximum depth, in mm. Default: Inf
 %
 % 'Volume'      : A scalar specifying the number of dipoles that the EEG
 %                 source contains. Default: 1
@@ -35,8 +34,12 @@ function obj = add_source(obj, varargin)
 % 'MaxStrength' : Maximum strength of the source dipole(s). Default: 1
 %
 % 'Strength'    : Source strength. Overrides MinStrength and MaxStrength
-%                
 %
+%
+% ## Notes:
+%                
+%   * The actual dipole angle will be randomly chosen between MinAngle and
+%     MaxAngle
 %
 % See also: head.mri
 %

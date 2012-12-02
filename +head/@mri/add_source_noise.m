@@ -1,6 +1,5 @@
 function obj = add_source_noise(obj, varargin)
-% ADD_SOURCE_NOISE 
-% Adds background noise at the source level
+% ADD_SOURCE_NOISE - Adds background noise at the source level
 %
 % 
 % obj = add_source_noise(obj)
@@ -13,7 +12,7 @@ function obj = add_source_noise(obj, varargin)
 % OBJ is a head.mri object
 %
 % 
-% Common key/value pairs:
+% ## Accepted key/value pairs:
 %
 % 'Strength'    : A scalar that determines noise strength. Default: 1
 %
@@ -76,7 +75,7 @@ mSph2 = mSph;
 angleShift = repmat(minangle, volume, 1)+(maxangle-minangle)*rand(volume, 1);
 angleShift = 2*pi*(angleShift/360);
 mSph2(:,2) = mSph2(:,2)+angleShift;
-mSph1(:,1) = mSph2(:,1)+rand*2*pi;
+mSph2(:,1) = mSph2(:,1)+rand*2*pi;
 [tmp1 tmp2 tmp3] = sph2cart(mSph2(:,1), mSph2(:,2), mSph2(:,3));
 m2 = [tmp1 tmp2 tmp3];
 

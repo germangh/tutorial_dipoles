@@ -33,12 +33,16 @@ MATLAB's command:
 	addpath(genpath('M:/mypath/tutorial_dipoles'))
 
 where `M:/mypath/tutorial_dipoles` is the location where you uncompressed
-the .zip file.
+the .zip file. In some occasions during this tutorial I will assume that
+you are running MATLAB commands from the root directory of the tutorial 
+(i.e. from `M:/mypath/tutorial_dipoles` in the example above). To change your
+working directory do this in MATLAB:
 
-__Note:__ The tutorial .zip file contains the tutorial code, the 
-required data files and this documentation in HTML format. You can browse
-the documentation offline by opening with your web browser file 
-`index.htm`, which is found under folder `tutorial_dipoles`.
+	cd M:/mypath/tutorial_dipoles
+	
+where you will have to change `M:/mypath/tutorial_dipoles` for the path where
+you downloaded the tutorial.
+
 
 ## Dependencies
 
@@ -175,8 +179,7 @@ This tutorial has been prepared for the course [Advanced Human Neurophysiology][
 As both code and documentation has been made from scratch for the 
 year 2011 course, it is likely that you will find bugs and typos. 
 Please [report those to me][myemail] so that I can fix them. I would also 
-appreciate any feedback (positive or negative) on the tutorial contents
-so that I can improve it. 
+appreciate any feedback on the tutorial contents so that I can improve it. 
 
 [Email me][myemail]
 

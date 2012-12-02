@@ -17,6 +17,11 @@ data = nan(obj.NbSensors, numel(time));
 for i = 1:numel(time)
    data(:, i) = sum(source_leadfield(obj, 1:obj.NbSources, 'Time', time, ...
        varargin{:}),2); 
+   
+   if ~isempty(obj.MeasNoise),
+      data(:,i) = data(:,i);% + obj.MeasNoise(:,i); 
+   end
+   
 end
 
 
