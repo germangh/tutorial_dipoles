@@ -16,6 +16,7 @@ distributed under a GNU General Public License.
 * [ICP_finite](http://www.mathworks.nl/matlabcentral/fileexchange/24301-finite-iterative-closest-point), by D. Kroon, and covered by the BSD license. 
 
 
-The rest of the code is distributed under a [Creative Commons Attribution-NonCommercial-ShareAlike licence](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+The rest of the code and the tutorial documentation is distributed under a
+ [Creative Commons Attribution-NonCommercial-ShareAlike licence](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 
