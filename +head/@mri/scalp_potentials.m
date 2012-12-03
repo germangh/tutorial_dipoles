@@ -19,7 +19,7 @@ for i = 1:numel(time)
        varargin{:}),2); 
    
    if ~isempty(obj.MeasNoise),
-      data(:,i) = data(:,i);% + obj.MeasNoise(:,i); 
+      data(:,i) = data(:,i) + obj.MeasNoise(:,i); 
    end
    
 end
