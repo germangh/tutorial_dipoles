@@ -15,7 +15,7 @@ the topic of this tutorial:
 
 [Download presentation slides][presentation_eegs]
 
-[presentation_eegs]: ./slides.pdf
+[presentation_eegs]: https://dl.dropbox.com/u/4479286/meeg_inverse_slides.pdf
 
 ## Download and Installation
 
@@ -25,7 +25,7 @@ subdirectories to your MATLAB's path.
 
 [Download the tutorial][tutorial_dipoles]
 
-[tutorial_dipoles]: ./tutorial_dipoles.zip
+[tutorial_dipoles]: https://dl.dropbox.com/u/4479286/tutorial_dipoles.zip
 
 To add a directory and all its subdirectories to MATLAB's path you can use
 MATLAB's command:
