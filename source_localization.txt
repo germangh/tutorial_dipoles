@@ -214,7 +214,6 @@ columns of ''A'' being very close to linearly dependent. You can check the
 conditioning of a matrix using MATLAB's command `cond()`. Let's check the
 condition number of our leadfield matrix:
 
-    % Give a shorter name to the leadfield matrix
     cond(myHead.SourceDipolesLeadField)
 
     ans =
