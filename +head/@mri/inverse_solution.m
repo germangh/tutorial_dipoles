@@ -15,19 +15,20 @@ function obj = inverse_solution(obj, varargin)
 % Documentation: class_head_mri.txt
 % Description: Compute inverse solution
 
-import misc.process_varargin;
+import misc.process_arguments;
 
-keySet = {'time', 'method'};
+opt.lambda = 0;
+opt.method = 'mne';
+opt.time   = 1;
 
-time = 1;
-method='mne';
-eval(process_varargin(keySet, varargin));
+[~, opt] = process_arguments(opt, varargin);
 
-switch lower(method),
+switch lower(opt.method),
     case 'mne'
-        M = pinv(obj.SourceDipolesLeadField);
+        A = obj.SourceDipolesLeadField;
+        M = A'*pinv(A*A'+opt.lambda*eye(size(A,1)));
         
-        potentials = scalp_potentials(obj, 'time', time);
+        potentials = scalp_potentials(obj, 'time', opt.time);
         
         strength = M*potentials;
        
@@ -35,7 +36,7 @@ switch lower(method),
         
 end
 
-name = method;
+name = opt.method;
 pnt = 1:obj.NbSourceVoxels;
 obj.InverseSolution = struct('name', name,...
     'strength', strength, ...

@@ -191,3 +191,63 @@ Let's also plot the estimated dipole strength at each source location, in a 2D p
 As you can see, the inverse estimate is completely wrong now. How is this possible, 
 even if the scalp potentials were only marginally disturbed by noise? What would you 
 do to try to overcome this problem?
+
+
+## Ill-conditioning
+
+If you didn't guess it, the inverse estimate obtained from our noisy 
+measurements was so poor because the leadfield matrix (i.e. the matrix of
+coefficients that maps current sources to potential differences at the 
+scalp) was ill-conditioned. By ill-conditioned we mean that we cannot 
+directly calculate an accurate pseudoinverse of the leadfield matrix. 
+Recall from the slides on [linear algebra][linear_algebra_slides] that the
+ pseudoinverse ''A^+'' of leadfield matrix ''A'' is defined as:
+
+[[Equation]]: A^+ = (A^T*A)^{-1}A^T
+
+
+[linear_algebra_slides]: https://dl.dropbox.com/u/4479286/linear_algebra.pdf
+
+
+The problem here is that the term ''A^T*A'' is not invertible, due to some 
+columns of ''A'' being very close to linearly dependent. You can check the
+conditioning of a matrix using MATLAB's command `cond()`. Let's check the
+condition number of our leadfield matrix:
+
+    % Give a shorter name to the leadfield matrix
+    cond(myHead.SourceDipolesLeadField)
+
+    ans =
+
+       1.2686e+16
+
+
+Remember from the [documentation][cond_doc] of the `cond()` command that, 
+the larger the condition number, the worse the conditioning of the matrix 
+is. In our case, we obtained a very large number, clearly indicating that, 
+even if we still can compute the pseudoinverse, using it to recover the 
+source dipoles magnitudes might lead to inaccurate results, especially in 
+the presence of noise.
+
+### Regularization
+
+As you learned from the course lectures, a way to deal with ill-conditioned
+inverse problems is to use [regularization][regularization]. Method 
+`inverse_solution()` allows you to define a regularization parameter 
+''\lambda'' to be used when computing the pseudoinverse of the leadfield:
+
+    myHead = inverse_solution(myHead, 'Lambda', 0.0001);
+    figure;
+    plot_inverse_solution_dipoles(myHead, 'time', 1);
+
+How does the inverse solution look like now? Play around with the 
+regularization parameter (and maybe with the level of measurement noise) 
+and tell your tutor what you learned. 
+
+
+
+
+
+
+[cond_doc]: http://www.mathworks.nl/help/matlab/ref/cond.html
+[regularization]: http://en.wikipedia.org/wiki/Tikhonov_regularization
