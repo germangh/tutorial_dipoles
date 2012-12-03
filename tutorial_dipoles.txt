@@ -10,12 +10,16 @@ However, the tutorial also aims to illustrate how the solution to
 the _inverse EEG problem_ can be easily confounded e.g. by the presence of 
 noisy background EEG activity. 
 
-Below you can download the slides of a presentation that deals with 
+Below you can download the slides of two presentations that deals with 
 the topic of this tutorial:
 
-[Download presentation slides][presentation_eegs]
+[Download slides on M/EEG source reconstruction][presentation_eegs]
+[Download slides on linear algebra concepts][presentation_lin_alg]
+
 
 [presentation_eegs]: https://dl.dropbox.com/u/4479286/meeg_inverse_slides.pdf
+[presentation_lin_alg]: https://dl.dropbox.com/u/4479286/linear_algebra.pdf
+
 
 ## Download and Installation
 
@@ -51,8 +55,11 @@ also under not too much older MATLAB versions. The tutorial makes use of the
 following freely available MATLAB toolboxes:
 
 [Fieldtrip MATLAB toolbox][fieldtrip]
+[ICP_finite][icp_finite], by D. Kroon 
+[BEMCP][fieldtrip], by C. Phillips
 
 [fieldtrip]: http://fieldtrip.fcdonders.nl/
+[icp_finite]: http://www.mathworks.nl/matlabcentral/fileexchange/24301-finite-iterative-closest-point
 
 
 For convenience, all the dependencies have been included in the tutorial 
@@ -63,8 +70,7 @@ __Note:__ The tutorial uses the 3D rendering capabilities of the OpenGL
 implementation that is included with your operating system. As OpenGL 
 support differ slightly between operating systems there is a small chance
 that some of the figures will display differently in different operating 
-systems. The figures shown in the tutorial have been generated in 
-Windows 7. 
+systems. 
 
 ## Getting help
 
@@ -148,7 +154,7 @@ a link reading `head.mri`. If you click that link you will get the help that
 you were looking for. Alternatively, you could have just used the command:
 
 	help head.mri.plot
-
+	
 
 ## Note on web-browsers
 
@@ -162,7 +168,12 @@ This documentation uses MathML to display inlined mathematics. Unfortunately
  Camino. At this point we can't do anything else than to direct you to use 
  these browsers to view these pages.	
 
-	
+## Public code repository
+
+The tutorial code is also available at a [public git repository][git_repo]. Feel free 
+to fork the code and enhance it in any way you want.
+
+[git_repo]: https://github.com/germangh/tutorial_dipoles
 
 
 ## Questions and feedback
