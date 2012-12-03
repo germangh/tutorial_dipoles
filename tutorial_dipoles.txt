@@ -10,11 +10,12 @@ However, the tutorial also aims to illustrate how the solution to
 the _inverse EEG problem_ can be easily confounded e.g. by the presence of 
 noisy background EEG activity. 
 
-Below you can download the slides of two presentations that deals with 
+Below you can download the slides of two presentations related with
 the topic of this tutorial:
 
-[Download slides on M/EEG source reconstruction][presentation_eegs]
-[Download slides on linear algebra concepts][presentation_lin_alg]
+* [Download slides on M/EEG source reconstruction][presentation_eegs]
+
+* [Download slides on linear algebra concepts][presentation_lin_alg]
 
 
 [presentation_eegs]: https://dl.dropbox.com/u/4479286/meeg_inverse_slides.pdf
@@ -54,15 +55,15 @@ The tutorial should work under MATLAB R2010a or newer. It is likely to work
 also under not too much older MATLAB versions. The tutorial makes use of the
 following freely available MATLAB toolboxes:
 
-[Fieldtrip MATLAB toolbox][fieldtrip]
-[ICP_finite][icp_finite], by D. Kroon 
-[BEMCP][fieldtrip], by C. Phillips
+* A small subset of [Fieldtrip][fieldtrip]
+* [ICP_finite][icp_finite], by D. Kroon 
+* [BEMCP][fieldtrip], by C. Phillips
 
 [fieldtrip]: http://fieldtrip.fcdonders.nl/
 [icp_finite]: http://www.mathworks.nl/matlabcentral/fileexchange/24301-finite-iterative-closest-point
 
 
-For convenience, all the dependencies have been included in the tutorial 
+For convenience, all dependencies have been included in the tutorial 
 .zip package so that you don't need to download them separately. 
 
 
