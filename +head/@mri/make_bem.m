@@ -1,4 +1,15 @@
 function obj = make_bem(obj, varargin)
+% MAKE_BEM - Compute BEM system matrix 
+%
+% obj = make_bem(obj);
+%
+% Where
+%
+% OBJ is a head.mri object.
+%
+% 
+% See also: external.fieldtrip.ft_prepare_bemmodel
+
 import misc.process_varargin;
 import external.fieldtrip.ft_prepare_bemmodel;
 

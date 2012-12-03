@@ -1,7 +1,5 @@
 
 function [vol, cfg] = ft_prepare_bemmodel(cfg, mri)
-import external.fieldtrip.*;
-import external.bemcp.*;
 % FT_PREPARE_BEMMODEL constructs triangulations of the boundaries between
 % multiple segmented tissue types in an anatomical MRI and subsequently
 % computes the BEM system matrix.
@@ -47,6 +45,9 @@ import external.bemcp.*;
 %    along with FieldTrip. If not, see <http://www.gnu.org/licenses/>.
 %
 % $Id: ft_prepare_bemmodel.m 4306 2011-09-27 07:52:27Z eelspa $
+
+import external.fieldtrip.*;
+import external.bemcp.*;
 
 ft_defaults
 
