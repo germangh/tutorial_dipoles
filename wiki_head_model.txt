@@ -89,8 +89,10 @@ assuming of course that you are in the ''tutorial_dipoles'' folder that you
 
 You can now easily plot the model surfaces with the command:
 
+````matlab
 	figure; 
 	plot(myHead);
+````
 
 Just for fun, see ''help head.mri.plot'' and try to make a figure that displays
 only the inner skull surface and the locations of the sensors. If you want, 
