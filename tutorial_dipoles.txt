@@ -1,6 +1,8 @@
 Simulating and estimating EEG sources
 ============
 
+[Back to my the homepage of German-Gomez-Herrero][homepage]
+
 
 In this tutorial we will learn how simple intracerebral current sources can 
 generate complicated patterns of EEG potentials at the scalp.
@@ -10,16 +12,12 @@ However, the tutorial also aims to illustrate how the solution to
 the _inverse EEG problem_ can be easily confounded e.g. by the presence of 
 noisy background EEG activity. 
 
-Below you can download the slides of two presentations related with
-the topic of this tutorial:
+Supporting materials:
 
-* [Download slides on M/EEG source reconstruction][presentation_eegs]
-
-* [Download slides on linear algebra concepts][presentation_lin_alg]
+* Slides on some related [linear algebra][linalg] concepts.
 
 
-[presentation_eegs]: https://dl.dropbox.com/u/4479286/meeg_inverse_slides.pdf
-[presentation_lin_alg]: https://dl.dropbox.com/u/4479286/linear_algebra.pdf
+[linalg]: https://speakerdeck.com/germangh/fundamentals-of-linear-algebra-for-neuroscientists
 
 
 ## Download and Installation
@@ -182,7 +180,7 @@ to fork the code and enhance it in any way you want.
 This tutorial has been prepared for the course [Advanced Human Neurophysiology][ahn],
  given at the [VU University Amsterdam][vu], and organized by 
 [Klaus Linkenkaer-Hansen][klaus]. The author of the tutorial is 
-[German Gomez-Herrero][myemail]. 
+[German Gomez-Herrero][homepage]. 
 
 [ahn]: http://www.nbtwiki.net/doku.php?id=courses:advanced_human_neurophysiology#.TtOOWvJ7eUM
 [vu]: http://www.vu.nl/en/
@@ -190,12 +188,12 @@ This tutorial has been prepared for the course [Advanced Human Neurophysiology][
 
 As both code and documentation has been made from scratch for the 
 year 2011 course, it is likely that you will find bugs and typos. 
-Please [report those to me][myemail] so that I can fix them. I would also 
+Please [report those to me][homepage] so that I can fix them. I would also 
 appreciate any feedback on the tutorial contents so that I can improve it. 
 
-[Email me][myemail]
+[Email me][homepage]
 
-[myemail]: mailto:german.gomezherrero@kasku.org 
+[homepage]: http://germangh.com 
 
 
 

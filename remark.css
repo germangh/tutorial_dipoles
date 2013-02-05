@@ -42,12 +42,12 @@ to be unique). */
 #remark pre
 {
     /* Verbatim content is bordered with a dotted, one-pixel wide rectangle. */
-    border-style: dotted;
+    border-style: none;
     border-width: 1px;
     border-color: rgb(85, 85, 85);
 
     /* Its background is colored light blue. */
-    background-color: rgb(234, 240, 255);
+    background-color: #fcf8e3; 
 
     /* This can be used to indent the verbatim content. */
     margin-top: 1em;
@@ -82,6 +82,7 @@ to be unique). */
 {
     color: #505080;
     font-family: monospace;
+    font-weight: 50;
     font-size: 15px;
 }
 
@@ -123,8 +124,7 @@ to be unique). */
     clear: left;
     margin: 1.5em 0em 1em 0em;
     font-size: 1.2em;
-    font-weight: normal;
-    color: #356535;
+    font-weight: bold;
 }
 
 /* Level 4 headings */
@@ -363,9 +363,9 @@ in the 'remark-footer' div. */
 {
     position: absolute;
     bottom: 0;
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 56%;
+    margin-left: 22%;
+    margin-right: 22%;
 }
 
 #remark-footer p 
@@ -451,19 +451,13 @@ strong {
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 300;
   src: local('Open Sans Light Italic'), local('OpenSansLight-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/PRmiXeptR36kaC0GEAetxvR_54zmj3SbGZQh3vCOwvY.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/PRmiXeptR36kaC0GEAetxhbnBKKEOwRKgsHDreGcocg.woff) format('woff');
-}
+
 
