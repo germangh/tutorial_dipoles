@@ -1,7 +1,7 @@
 Simulating and estimating EEG sources
 ============
 
-[Back to my the homepage of German-Gomez-Herrero][homepage]
+[Back to my homepage][homepage]
 
 
 In this tutorial we will learn how simple intracerebral current sources can 

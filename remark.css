@@ -90,7 +90,7 @@ to be unique). */
 #remark h1
 {
     clear: left;
-    font-size: 1.6em;
+    font-size: 28px;
     font-weight: normal;
     color: black; /*#656565*/
     margin: 0;
@@ -107,7 +107,7 @@ to be unique). */
 #remark h2 
 {
     clear: left;
-    font-size: 1.4em;
+    font-size: 22px;
     font-weight: normal;
     color: black;
     margin: 1.5em 0em 1em 0em;
