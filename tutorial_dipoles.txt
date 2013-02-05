@@ -28,7 +28,7 @@ subdirectories to your MATLAB's path.
 
 [Download the tutorial][tutorial_dipoles]
 
-[tutorial_dipoles]: ./tutorial_dipoles.zip
+[tutorial_dipoles]: http://kasku.org/tutorials/tutorial_dipoles.zip
 
 To add a directory and all its subdirectories to MATLAB's path you can use
 MATLAB's command:

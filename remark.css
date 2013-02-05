@@ -25,8 +25,8 @@ to be unique). */
 #remark
 {
     /* Fonts from the sans-serif generic family are easier to read
-    on the screen. Sans-serif roughly means 'without wiggles'. */
-    font-family: 'Open Sans', Trebuchet MS, Sans-Serif;
+    on the screen. Sans-serif roughly means 'without wiggles'. */   
+    font-family: 'Open Sans', Trebuchet MS, Sans-Serif;*/
     /* See the W3C CSS School for this trick. */
     font-size: 100%;
     /* Using more space between lines of text makes it easier to read. */
@@ -73,7 +73,7 @@ to be unique). */
 {
     margin-left: 0px;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 17px;
     /*text-align: justify;*/
 }
 
@@ -83,14 +83,14 @@ to be unique). */
     color: #505080;
     font-family: monospace;
     font-weight: 50;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 /* Level 1 headings */
 #remark h1
 {
     clear: left;
-    font-size: 28px;
+    font-size: 31px;
     font-weight: normal;
     color: black; /*#656565*/
     margin: 0;
@@ -107,7 +107,7 @@ to be unique). */
 #remark h2 
 {
     clear: left;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: normal;
     color: black;
     margin: 1.5em 0em 1em 0em;
