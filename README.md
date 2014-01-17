@@ -1,19 +1,19 @@
 tutorial_dipoles
 ================
 
-MATLAB tutorial on M/EEG source modeling. A live version of this tutorial should be 
+MATLAB tutorial on M/EEG source modeling. A live version of this tutorial should be
 available at the URL:
 
-http://kasku.org/tutorials/tutorial_dipoles
+http://www.germangh.com/tutorials/dipoles/tutorial_dipoles.htm
 
 This repository contains the following software from third-parties:
 
 * A small subset of the [Fieldtrip toolbox](http://fieldtrip.fcdonders.nl/), which is
-distributed under a GNU General Public License. 
+distributed under a GNU General Public License.
 
 * The BEMCP toolbox by C. Phillips, which is part of [Fieldtrip](http://fieldtrip.fcdonders.nl/).
 
-* [ICP_finite](http://www.mathworks.nl/matlabcentral/fileexchange/24301-finite-iterative-closest-point), by D. Kroon, and covered by the BSD license. 
+* [ICP_finite](http://www.mathworks.nl/matlabcentral/fileexchange/24301-finite-iterative-closest-point), by D. Kroon, and covered by the BSD license.
 
 
 The rest of the code and the tutorial documentation is distributed under a
