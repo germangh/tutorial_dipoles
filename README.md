@@ -27,3 +27,7 @@ how to use the tutorial or bug reports. If you find a bug, please make an
 
 [github-bugs]: http://github.com/germangh/tutorial_dipoles/issues
 
+
+## Where is the tutorial?
+
+It's [here](./tutorial_dipoles.md).
