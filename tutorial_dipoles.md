@@ -221,7 +221,6 @@ help on how to use the tutorial or to report bug. If you find a bug your best
 chance at getting me to fix it is making an [issue report at github][github-bugs].
 
 [github-bugs]: http://github.com/germangh/tutorial_dipoles/issues
-[Email me][homepage]
 
 [homepage]: http://germangh.com 
 
