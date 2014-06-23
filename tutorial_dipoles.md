@@ -225,6 +225,11 @@ chance at getting me to fix it is making an [issue report at github][github-bugs
 [homepage]: http://germangh.com 
 
 
+## Start the tutorial
+
+[Go to the first part of the tutorial](./head_model.md)
+
+
 
 
 
