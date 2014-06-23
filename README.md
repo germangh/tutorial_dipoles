@@ -1,10 +1,7 @@
 tutorial_dipoles
 ================
 
-MATLAB tutorial on M/EEG source modeling. A live version of this tutorial should be
-available at the URL:
-
-http://www.germangh.com/tutorials/dipoles/tutorial_dipoles.htm
+[MATLAB tutorial on M/EEG source modeling](./tutorial_dipoles.md)
 
 This repository contains the following software from third-parties:
 
@@ -19,4 +16,14 @@ distributed under a GNU General Public License.
 The rest of the code and the tutorial documentation is distributed under a
  [Creative Commons Attribution-NonCommercial-ShareAlike licence](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
+
+
+## Sorry, no support
+
+I am sharing this tutorial with the hope that it will be useful for someone. 
+However, I do not have any time to answer personal emails requesting help on 
+how to use the tutorial or bug reports. If you find a bug, please make an 
+[issue report at github][github-bugs] and I may fix it at some point. 
+
+[github-bugs]: http://github.com/germangh/tutorial_dipoles/issues
 

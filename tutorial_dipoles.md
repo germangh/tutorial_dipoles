@@ -213,11 +213,13 @@ This tutorial has been prepared for the course [Advanced Human Neurophysiology][
 [vu]: http://www.vu.nl/en/
 [klaus]: http://www.bio.vu.nl/enf/linkenkaer/
 
-As both code and documentation has been made from scratch for the 
-year 2011 course, it is likely that you will find bugs and typos. 
-Please [report those to me][homepage] so that I can fix them. I would also 
-appreciate any feedback on the tutorial contents so that I can improve it. 
+__IMPORTANT:__
 
+Unfortunately, I do not have anymore time to answer personal emails requesting 
+help on how to use the tutorial or to report bug. If you find a bug your best 
+chance at getting me to fix it is making an [issue report at github][github-bugs].
+
+[github-bugs]: http://github.com/germangh/tutorial_dipoles/issues
 [Email me][homepage]
 
 [homepage]: http://germangh.com 
