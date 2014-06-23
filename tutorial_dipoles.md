@@ -202,7 +202,7 @@ to fork the code and enhance it in any way you want.
 [git_repo]: http://github.com/germangh/tutorial_dipoles
 
 
-## Questions and feedback
+## Credits
 
 This tutorial has been prepared for the course [Advanced Human Neurophysiology][ahn],
  given at the [VU University Amsterdam][vu], and organized by 
@@ -213,7 +213,8 @@ This tutorial has been prepared for the course [Advanced Human Neurophysiology][
 [vu]: http://www.vu.nl/en/
 [klaus]: http://www.bio.vu.nl/enf/linkenkaer/
 
-__IMPORTANT:__
+
+## Support 
 
 Unfortunately, I do not have anymore time to answer personal emails requesting 
 help on how to use the tutorial or to report bug. If you find a bug your best 
