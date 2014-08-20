@@ -30,4 +30,4 @@ how to use the tutorial or bug reports. If you find a bug, please make an
 
 ## Where is the tutorial?
 
-It's [here](./tutorial_dipoles.md).
+It's [here](https://github.com/germangh/tutorial_dipoles/blob/master/tutorial_dipoles.md).
